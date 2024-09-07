@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake or True</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/mascotte.png" type="image/png">
+
+
+</head>
+<body>
+    <header>
+        <h1>Fake or True</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="#" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#" onclick="navigateTo('quiz-section')">Quiz</a></li>
+                <li><a href="#" onclick="navigateTo('leaderboard-section')">Leaderboard</a></li>
+                <li><a href="#" onclick="navigateTo('submission-section')">Submit Fake News</a></li>
+                <li><a href="#" onclick="navigateTo('battle-section')">Battle</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main >
+            <section id="home"class="welcome-screen card">
+                <div class="story-intro">
+                    <h2>Welcome to Fake or True!</h2>
+                    <p>Join our heroes in the fight against fake news! Meet Danae, Cyril, Lylian, and Eve, a team of young detectives on a mission to uncover the truth.</p>
+                    <div class="character-container">
+                        <div class="character" id="Danae">
+                            <img src="images/max.png" alt="Danae">
+                            <p>Danae - The tech genius</p>
+                        </div>
+                        <div class="character" id="Cyril">
+                            <img src="images/lily.png" alt="Cyril">
+                            <p>Cyril - The innovative philosoph</p>
+                        </div>
+                        <div class="character" id="Lylian">
+                            <img src="images/sam.png" alt="Lylian">
+                            <p>Lylian - The critical thinking mind</p>
+                        </div>
+                        <div class="character" id="Eve">
+                            <img src="images/ava.png" alt="Eve">
+                            <p>Eve - The fact-checking wizard</p>
+                        </div>
+                    </div>
+                    <div class="story-action">
+                        <p>Ready to join the team and help them sort fact from fiction? Enter your pseudonym below and let's start the adventure!</p>
+                    </div>
+                </div>
+                <label for="username">Enter your pseudonym:</label>
+                <input type="text" id="username" placeholder="Enter your pseudonym">
+                <button class="btn" onclick="startQuiz()">Start Quiz</button>
+            </section>
+
+            <section id="quiz-section" class="hidden card">
+                <div id="media-display" class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <!-- Content for the front of the card (Question) will be dynamically loaded -->
+                        </div>
+                        <div class="flip-card-back">
+                            <!-- Content for the back of the card (Feedback) will be dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+                <div id="question">
+                    <p id="question-text">Is this information true or false?</p>
+                    <button class="btn-true" id="true-btn">True</button>
+                    <button class="btn-false" id="false-btn">False</button>
+                </div>
+            </section>
+         
+
+            <aside id="leaderboard-section" class="hidden card">
+                <h2>Leaderboard</h2>
+                <h3>Best Players</h3>
+                <table id="player-leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Pseudonym</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Player leaderboard entries will be dynamically populated -->
+                    </tbody>
+                </table>
+
+                <h3>Best Fake News</h3>
+                <table id="news-leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Fake news leaderboard entries will be dynamically populated -->
+                    </tbody>
+                </table>
+            </aside>
+
+            <section id="submission-section" class="hidden card">
+                <h2>Submit Fake News</h2>
+                <form id="submission-form" onsubmit="submitFakeNews(event)">
+                    <input type="text" id="fake-news-url" placeholder="Enter fake news URL" required>
+                    <input type="text" id="manipulation-technique" placeholder="Enter manipulation technique" required>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                <h3>Vote for Fake News of the Month</h3>
+                <ul id="voting-list">
+                    <!-- User submissions for voting -->
+                </ul>
+            </section>
+            <section id="battle-section" class="hidden card">
+                <div id="media-display2" class="battle-menu">
+                    <div class="battle-menu-inner">
+                        <div class="battle-menu-front">
+                            <p>Put Your Truth-Spotting Skills to the Test!</p>
+                            <p>Choose Your Challenge: Express (2 minutes), Medium (5 minutes), or Long (10 minutes). The player with the highest ratio of correct answers wins. Ready to prove your expertise? Doubtful? Verify your answers with various sources—just remember to beat the clock! Let the battle begin!</p>
+                            <h2>Choose the battle time!</h2>
+
+                            <div id="time">
+                                <button class="btn" id="2min-btn">Express</button>
+                                <button class="btn" id="5min-btn">Medium</button>
+                                <button class="btn" id="10min-btn">Long</button>
+                            </div>
+                        </div>
+                        <div class="battle-menu-back">
+                            <!-- The content for the back side will be updated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="quiz-section2" class="hidden card">
+                <div id="battle-players">
+                <div class="player-info" id="player1">
+                    <img src="images/pdpbasic.png" alt="Player 1" class="pdp">
+                    <p>Pseudo: <span id="player1-pseudo">Player 1</span></p>
+                    <p>Score: <span id="player1-score">0</span></p>
+                </div>
+                <div id="media-display3" class="flip-card2">
+                    <div class="flip-card-inner2">
+                        <div class="flip-card-front2">
+                            <!-- Content for the front of the card (Question) will be dynamically loaded -->
+                        </div>
+                        <div class="flip-card-back2">
+                            <!-- Content for the back of the card (Feedback) will be dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+                    <div class="player-info" id="player2">
+                        <img src="images/pdpbasic.png" alt="Player 2" class="pdp">
+                        <p>Pseudo: <span id="player2-pseudo">Player 2</span></p>
+                        <p>Score: <span id="player2-score">0</span></p>
+                    </div>
+                </div>
+                <div id="question2">
+                    <p id="question-text2">Is this information true or false?</p>
+                    <button class="btn-true" id="true-btn2">True</button>
+                    <button class="btn-false" id="false-btn2">False</button>
+                </div>
+                <!-- Timer display in quiz section -->
+                <div id="timer-container">
+                    <span id="time-left">120</span> seconds left
+                    <div id="progress-bar-container">
+                        <div id="progress-bar"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <img src="images/mascotte.png" alt="mascotte" class="pdp2">
+            <p>&copy; 2024 Fake or True. Empowering young minds to think critically.</p>
+            
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
